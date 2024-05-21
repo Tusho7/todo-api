@@ -1,4 +1,3 @@
-import Task from "../models/Task.js";
 import Resource from "../models/resourceSchema.js";
 
 export const createResource = async (req, res) => {
