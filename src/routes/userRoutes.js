@@ -1,6 +1,6 @@
 import express from "express";
 import { authenticateToken, authorizeRole } from "../middlewares/auth.js";
-import { changeUserRole, deleteUser } from "../controllers/userController.js";
+import { changeUserRole, changeUsername, deleteUser } from "../controllers/userController.js";
 const userRoutes = express.Router();
 
 userRoutes.post(
@@ -34,5 +34,6 @@ userRoutes.delete('/:id', authenticateToken, authorizeRole(['admin']), deleteUse
 
 userRoutes.patch('/:id/role', authenticateToken, authorizeRole(['admin']), changeUserRole);
 
+userRoutes.patch('/:id/username', authenticateToken, authorizeRole(['admin']), changeUsername);
 
 export default userRoutes;
