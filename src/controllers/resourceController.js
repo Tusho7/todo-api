@@ -68,17 +68,13 @@ export const editDescription = async (req, res) => {
     }
 };
 
-export const changeAssignee = async (req, res) => {
+export const getTasksByUserId = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { assignee } = req.body;
-        const updatedResource = await Resource.findByIdAndUpdate(id, { assignee }, { new: true });
-        if (!updatedResource) {
-            return res.status(404).json({ message: 'Resource not found' });
-        }
-        res.status(200).json({ message: 'Assignee changed successfully', resource: updatedResource });
+        const userId = req.params.id;
+        const tasks = await Resource.find({ assignee: userId });
+        res.json(tasks);
     } catch (error) {
-        console.error('Error changing assignee:', error);
-        res.status(500).json({ message: 'Failed to change assignee', error: error.message });
+        console.error('Error fetching tasks by user ID:', error);
+        res.status(500).json({ message: 'Failed to fetch tasks by user ID', error: error.message });
     }
 };
