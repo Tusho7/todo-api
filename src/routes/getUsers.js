@@ -6,7 +6,7 @@ const getUserRouter = express.Router();
 
 getUserRouter.get('/', authenticateToken, authorizeRole(['admin']), async (req, res) => {
     try {
-        const users = await User.find({}, 'username role'); // Fetch only username and role
+        const users = await User.find({}, 'username role'); 
         res.json(users);
     } catch (error) {
         console.error('Error fetching users:', error);

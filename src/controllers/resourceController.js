@@ -78,3 +78,20 @@ export const getTasksByUserId = async (req, res) => {
         res.status(500).json({ message: 'Failed to fetch tasks by user ID', error: error.message });
     }
 };
+
+export const addTaskAssignee = async (req, res) => {
+    try {
+      const taskId = req.params.id;
+      const { assigneeId } = req.body;
+      const updatedTask = await Resource.findByIdAndUpdate(
+        taskId,
+        { assignee: assigneeId },
+        { new: true }
+      );
+      res.json(updatedTask);
+    } catch (error) {
+      console.error('Error adding task assignee:', error);
+      res.status(500).json({ message: 'Failed to add task assignee', error: error.message });
+    }
+  };
+  
