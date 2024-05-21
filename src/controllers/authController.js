@@ -29,7 +29,7 @@ export const login = async (req, res) => {
             process.env.JWT_SECRET, 
             { expiresIn: '1h' }
         );
-        res.json({ id: user._id, token, role: user.role }); // Include user's ID in response
+        res.json({ id: user._id, token, role: user.role });
     } catch (error) {
         res.status(500).json({ error: 'Error logging in', details: error.message });
     }

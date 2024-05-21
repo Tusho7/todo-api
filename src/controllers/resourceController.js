@@ -147,21 +147,21 @@ export const markTaskAsComplete = async (req, res) => {
 };
 
 export const uncompleteTask = async (req, res) => {
-    try {
-        const taskId = req.params.id;
-        const updatedTask = await Resource.findByIdAndUpdate(
-          taskId,
-          { completed: false },
-          { new: true }
-        );
-    
-        if (!updatedTask) {
-          return res.status(404).json({ message: "Task not found" });
-        }
-    
-        res.status(200).json(updatedTask);
-      } catch (error) {
-        console.error("Error marking task as uncomplete:", error);
-        res.status(500).json({ message: "Internal server error" });
-      }
+  try {
+    const taskId = req.params.id;
+    const updatedTask = await Resource.findByIdAndUpdate(
+      taskId,
+      { completed: false },
+      { new: true }
+    );
+
+    if (!updatedTask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    res.status(200).json(updatedTask);
+  } catch (error) {
+    console.error("Error marking task as uncomplete:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
