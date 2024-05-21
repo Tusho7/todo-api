@@ -1,5 +1,5 @@
 import express from 'express';
-import { addTaskAssignee, createResource, deleteTask, editDescription, editTitle, getTasks, getTasksByUserId, markTaskAsComplete } from '../controllers/resourceController.js';
+import { addTaskAssignee, createResource, deleteTask, editDescription, editTitle, getTasks, getTasksByUserId, markTaskAsComplete, uncompleteTask } from '../controllers/resourceController.js';
 import { authenticateToken, authorizeRole } from '../middlewares/auth.js';
 
 const resourceRouter = express.Router();
@@ -19,6 +19,8 @@ resourceRouter.patch('/:id', authenticateToken, authorizeRole(['admin']), editDe
 resourceRouter.patch('/:id/assignee', authenticateToken, authorizeRole(['admin']), addTaskAssignee);
 
 resourceRouter.patch('/:id/complete', authenticateToken, markTaskAsComplete);
+
+resourceRouter.patch("/:id/uncomplete", authenticateToken, uncompleteTask )
 
 
 export default resourceRouter;
